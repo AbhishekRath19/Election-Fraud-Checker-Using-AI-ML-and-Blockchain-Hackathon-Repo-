@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    {% if has_voted %}
+        <h2>Vote Recorded</h2>
+        <div class="success-message">
+            <p>Your vote has been successfully recorded!</p>
+            {% if vote %}
+                <p>Transaction Hash: <code>{{ vote.blockchain_tx_hash or 'Not yet confirmed on blockchain' }}</code></p>
+            {% endif %}
+        </div>
+        <a href="{{ url_for('voting.results') }}" class="button">View Results</a>
+    {% else %}
+        <h2>Cast Your Vote</h2>
+        <p>Welcome, {{ user.name }}. Please select a party to vote for.</p>
+        
+        <form id="voteForm" method="POST" action="{{ url_for('voting.cast_vote', user_id=user.id) }}">
+            <div class="form-group">
+                <label>Select Party:</label>
+                {% for party in parties %}
+                    <div class="radio-option">
+                        <input type="radio" id="party_{{ party.id }}" name="party_id" value="{{ party.id }}" required>
+                        <label for="party_{{ party.id }}">{{ party.name }}</label>
+                        {% if party.description %}
+                            <small>{{ party.description }}</small>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+            
+            <button type="submit">Submit Vote</button>
+        </form>
+        
+        <div class="user-info">
+            <h3>Your Information</h3>
+            <p><strong>Name:</strong> {{ user.name }}</p>
+            <p><strong>User ID:</strong> {{ user.id }}</p>
+            <p><strong>ID on File:</strong> {{ user.id_image_path.split('/')[-1] }}</p>
+        </div>
+    {% endif %}
+</div>
+
+<script>
+document.getElementById('voteForm').addEventListener('submit', function(e) {
+    if (!confirm('Are you sure you want to submit your vote? This action cannot be undone.')) {
+        e.preventDefault();
+    }
+});
+</script>
+{% endblock %}
