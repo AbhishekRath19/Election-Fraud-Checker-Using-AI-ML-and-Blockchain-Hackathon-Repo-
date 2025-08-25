@@ -1,0 +1,34 @@
+{
+  "name": "ai-blockchain-voting-system-integrated",
+  "version": "1.0.0",
+  "description": "Integrated AI-Blockchain Election Ballot System for InnovAct 2025 Hackathon",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "node app.js",
+    "test": "echo \"Test suite not implemented\" && exit 0"
+  },
+  "keywords": [
+    "blockchain",
+    "voting",
+    "election",
+    "ai",
+    "verification",
+    "hackathon",
+    "innovact2025"
+  ],
+  "author": "InnovAct 2025 Team",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "multer": "^1.4.5-lts.1"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-team/ai-blockchain-voting-integrated.git"
+  }
+}
